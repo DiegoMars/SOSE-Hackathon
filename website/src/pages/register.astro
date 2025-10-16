@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Register">
+  <!-- From Uiverse.io by Yaya12085 --> 
+  <div class="form-container">
+    <p class="title">Registration</p>
+    <form action='/api/auth/register' method='post' class="form">
+      <div class="input-group">
+        <label for='email'>Email</label>
+        <input type='email' name='email' id='email' required />
+      </div>
+      <div class="input-group">
+        <label for='password'>Password</label>
+        <input type='password' name='password' id='password' required />
+      </div>
+      <button type='submit' class="sign">Sign Up</button>
+    </form>
+    <div class="social-message">
+      <div class="line"></div>
+      <p class="message">Login with discord</p>
+      <div class="line"></div>
+    </div>
+    <div class="social-icons">
+      <button aria-label="Log in with GitHub" class="icon">
+<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 388.049"><path fill-rule="nonzero" d="M433.713 32.491A424.231 424.231 0 00328.061.005c-4.953 8.873-9.488 18.156-13.492 27.509a393.937 393.937 0 00-58.629-4.408c-19.594 0-39.284 1.489-58.637 4.37-3.952-9.33-8.543-18.581-13.525-27.476-36.435 6.212-72.045 17.196-105.676 32.555-66.867 98.92-84.988 195.368-75.928 290.446a425.967 425.967 0 00129.563 65.03c10.447-14.103 19.806-29.116 27.752-44.74a273.827 273.827 0 01-43.716-20.862c3.665-2.658 7.249-5.396 10.712-8.055 40.496 19.019 84.745 28.94 129.514 28.94 44.77 0 89.019-9.921 129.517-28.943 3.504 2.86 7.088 5.598 10.712 8.055a275.576 275.576 0 01-43.796 20.918 311.49 311.49 0 0027.752 44.705 424.235 424.235 0 00129.65-65.019l-.011.011c10.632-110.26-18.162-205.822-76.11-290.55zM170.948 264.529c-25.249 0-46.11-22.914-46.11-51.104 0-28.189 20.135-51.304 46.029-51.304 25.895 0 46.592 23.115 46.15 51.304-.443 28.19-20.336 51.104-46.069 51.104zm170.102 0c-25.29 0-46.069-22.914-46.069-51.104 0-28.189 20.135-51.304 46.069-51.304s46.472 23.115 46.029 51.304c-.443 28.19-20.296 51.104-46.029 51.104z"/></svg>
+      </button>
+    </div>
+    <p class="signup">Already have an account?
+      <a href="/signin" class="">Sign in</a>
+    </p>
+  </div>
+</Layout>
+
+<style>
+  /* From Uiverse.io by Yaya12085 */ 
+  .form-container {
+    margin: 5rem auto;
+    width: 320px;
+    border-radius: 0.75rem;
+    background-color: var(--background-700);
+    padding: 2rem;
+    color: var(--text);
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+  }
+
+  .form {
+    margin-top: 1.5rem;
+  }
+
+  .input-group {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .input-group label {
+    display: block;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .input-group input {
+    width: 320px;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+    box-sizing: border-box; /* includes input padding/border in its width */
+  }
+
+  .input-group input:focus {
+    border-color: var(--accent);
+  }
+
+  .forgot a,.signup a {
+    color: rgba(243, 244, 246, 1);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .forgot a:hover, .signup a:hover {
+    text-decoration: underline rgba(167, 139, 250, 1);
+  }
+
+  .sign {
+    display: block;
+    width: 100%;
+    background-color: var(--accent);
+    padding: 0.75rem;
+    text-align: center;
+    color: var(--background-700);
+    border: none;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  .social-message {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
+  .line {
+    height: 1px;
+    flex: 1 1 0%;
+    background-color: var(--accent);
+  }
+
+  .social-message .message {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--text);
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-icons .icon {
+    border-radius: 0.125rem;
+    border: none;
+    background-color: transparent;
+  }
+
+  .social-icons .icon svg {
+    height: 2rem;
+    width: 2rem;
+    fill: #fff;
+  }
+
+  .signup {
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgba(156, 163, 175, 1);
+  }
+</style>
