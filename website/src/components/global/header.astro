@@ -1,0 +1,20 @@
+---
+// This makes it so that this component is prerendered, meaning that this while become basic html
+// and CSS. If it wasn't prerendered, then it would "build" this component everytime the page is
+// rendered, which is a lil redundant and not needed if we are not doing like api requests on this
+// specific object
+export const prerender = true
+---
+<section>
+</section>
+
+<style>
+/*
+  Don't worry about your ids/classes mixing with other components, Astro makes it so that they
+  are contained within this component automatically
+*/
+section {
+  height: 100px;
+  background-color: yellow;
+}
+</style>
