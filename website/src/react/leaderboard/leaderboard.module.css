@@ -1,14 +1,14 @@
 .container {
-  width: 100%;
-  max-width: 56rem; /* ~896px */
-  margin-inline: auto;
-  padding-inline: 1rem;
+  width: 80%;
+  max-width: 56rem;
+  margin: auto;
+  padding: 1.5rem 2rem;
 }
 
 .title {
   color: var(--text);
-  margin: 0 0 0.75rem;
-  letter-spacing: 0.2px;
+  text-align: center;
+  padding-bottom: 1rem;
 }
 
 .list {

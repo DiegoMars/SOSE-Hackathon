@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchPublicLeaderboard, type PublicLeaderboardRow } from '../../lib/leaderboard';
-import styles from './Leaderboard.module.css';
+import styles from './leaderboard.module.css';
 
 export default function Leaderboard({
   limit = 10,
