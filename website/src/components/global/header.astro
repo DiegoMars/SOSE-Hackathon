@@ -1,20 +1,72 @@
 ---
-// This makes it so that this component is prerendered, meaning that this while become basic html
-// and CSS. If it wasn't prerendered, then it would "build" this component everytime the page is
-// rendered, which is a lil redundant and not needed if we are not doing like api requests on this
-// specific object
-export const prerender = true
+import { Image } from "astro:assets";
+import Logo from "../../assets/Data n'structor.png";
 ---
-<section>
-</section>
+<nav>
+  <div class="logo" target="_self">
+    <a href="/" >
+      <Image src={Logo} alt="Logo" height="200" loading="eager">
+    </a>
+  </div>
+  <div class="links">
+    <a href="/" target="_self">
+      <h4>Home</h4>
+    </a>
+    <a href="/leaderboard" target="_self">
+      <h4>Leaderboard</h4>
+    </a>
+    <a href="/docs" target="_self" class="disabled-link">
+      <h4>Documentation</h4>
+    </a>
+    <!-- Adding sign-in stuff just incase it gets used in the future -->
+    <!-- <a href="/signin" target="_self"> -->
+    <!--   <h4>Sign In</h4> -->
+    <!-- </a> -->
+    <!-- <a href="/register" target="_self"> -->
+    <!--   <h4>Register</h4> -->
+    <!-- </a> -->
+  </div>
+</nav>
 
 <style>
-/*
-  Don't worry about your ids/classes mixing with other components, Astro makes it so that they
-  are contained within this component automatically
-*/
-section {
-  height: 100px;
-  background-color: yellow;
-}
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--background);
+  }
+
+  .logo img{
+    height: 7rem;
+    width: 7rem;
+  }
+
+  .links {
+    margin: auto 0;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .links > a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .disabled-link {
+    color: var(--accent-700) !important;
+    pointer-events: none;
+  }
+
+  .links h4 {
+    padding-left: 1.5rem;
+  }
+
+  /* Media queries */
+  /* @media screen and (min-width: 576px){ */
+  /* } */
+  /* @media screen and (min-width: 780px){ */
+  /* } */
+  /* @media screen and (min-width: 1200px){ */
+  /* } */
 </style>
