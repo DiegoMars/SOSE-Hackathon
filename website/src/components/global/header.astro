@@ -3,8 +3,8 @@ import { Image } from "astro:assets";
 import Logo from "../../assets/Data n'structor.png";
 ---
 <nav>
-  <div class="logo" target="_self">
-    <a href="/" >
+  <div class="logo">
+    <a href="/" target="_self">
       <Image src={Logo} alt="Logo" height="200" loading="eager">
     </a>
   </div>
@@ -15,7 +15,7 @@ import Logo from "../../assets/Data n'structor.png";
     <a href="/leaderboard" target="_self">
       <h4>Leaderboard</h4>
     </a>
-    <a href="/docs" target="_self" class="disabled-link">
+    <a href="/docs" target="_self">
       <h4>Documentation</h4>
     </a>
     <!-- Adding sign-in stuff just incase it gets used in the future -->
@@ -38,8 +38,8 @@ import Logo from "../../assets/Data n'structor.png";
   }
 
   .logo img{
-    height: 7rem;
-    width: 7rem;
+    height: 6rem;
+    width: 6rem;
   }
 
   .links {
@@ -60,6 +60,7 @@ import Logo from "../../assets/Data n'structor.png";
 
   .links h4 {
     padding-left: 1.5rem;
+    font-size: 1.333rem; /* 21.28px */
   }
 
   /* Media queries */
