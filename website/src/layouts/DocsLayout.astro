@@ -1,0 +1,152 @@
+---
+const {title="Documentation"} = Astro.props;
+import Header from "../components/global/header.astro";
+import Footer from "../components/global/footer.astro";
+export const prerender = true
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="icon" type="image/x-icon" href="/temp.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <style is:global>
+  @import url('https://fonts.googleapis.com/css?family=Noto%20Sans%20Old%20Italic:700|Noto%20Sans%20Old%20Italic:400');
+
+    :root {
+       /* Some color variables */
+			--text: #e6e8f7;
+			--background: #090c1e;
+			--primary: #989cdf;
+			--secondary: #522578;
+			--accent: #5c69fe;
+
+			--text-50: #ecedf9;
+			--text-100: #d8dbf3;
+			--text-200: #b1b8e7;
+			--text-300: #8b94da;
+			--text-400: #6470ce;
+			--text-500: #3d4dc2;
+			--text-600: #313d9b;
+			--text-700: #252e74;
+			--text-800: #181f4e;
+			--text-900: #0c0f27;
+			--text-950: #060813;
+
+			--background-50: #ebedf9;
+			--background-100: #d8dcf3;
+			--background-200: #b0b9e8;
+			--background-300: #8996dc;
+			--background-400: #6272d0;
+			--background-500: #3b4fc4;
+			--background-600: #2f3f9d;
+			--background-700: #233076;
+			--background-800: #17204f;
+			--background-900: #0c1027;
+			--background-950: #060814;
+
+			--primary-50: #ebecf9;
+			--primary-100: #d8d9f3;
+			--primary-200: #b1b4e7;
+			--primary-300: #8a8edb;
+			--primary-400: #6368cf;
+			--primary-500: #3c43c3;
+			--primary-600: #30359c;
+			--primary-700: #242875;
+			--primary-800: #181b4e;
+			--primary-900: #0c0d27;
+			--primary-950: #060714;
+
+			--secondary-50: #f3ebf9;
+			--secondary-100: #e7d8f3;
+			--secondary-200: #cfb1e7;
+			--secondary-300: #b78adb;
+			--secondary-400: #9e63cf;
+			--secondary-500: #863cc3;
+			--secondary-600: #6b309c;
+			--secondary-700: #512475;
+			--secondary-800: #36184e;
+			--secondary-900: #1b0c27;
+			--secondary-950: #0d0614;
+
+			--accent-50: #e6e8ff;
+			--accent-100: #ccd0ff;
+			--accent-200: #9aa2fe;
+			--accent-300: #6773fe;
+			--accent-400: #3445fe;
+			--accent-500: #0116fe;
+			--accent-600: #0112cb;
+			--accent-700: #010d98;
+			--accent-800: #010965;
+			--accent-900: #000433;
+			--accent-950: #000219;
+
+
+      /* Some size variables for width sizes */
+      --xs: 0;
+      --sm: 576px;
+      --md: 768px;
+      --lg: 992px;
+      --xl: 1200px;
+      --xxl: 1400px;
+    }
+
+    html {
+      scroll-behavior: smooth; /* Makes the scrolling during ID links smooth */
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <Header>
+    </Header>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <Footer>
+  </Footer>
+</body>
+</html>
+
+<!-- Global is needed here to make it global -->
+<style is:global>
+/*                        */
+/* Real Time Colors Stuff */
+/*                        */
+body {
+  font-family: 'Noto Sans Old Italic', "Helvetica", "Times New Roman";
+  font-weight: 400;
+  background-color: var(--background);
+  margin: 0;
+  color: var(--text);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Noto Sans Old Italic', "Helvetica", "Times New Roman";
+  font-weight: 700;
+}
+
+h1, h2, h3, h4, h5, small {
+  margin: 0;
+}
+
+html {font-size: 100%;} /* 16px */
+
+h1 {font-size: 3.158rem; /* 50.56px */}
+
+h2 {font-size: 2.369rem; /* 37.92px */}
+
+h3 {font-size: 1.777rem; /* 28.48px */}
+
+h4 {font-size: 1.333rem; /* 21.28px */}
+
+/*                       */
+/* Markdown Fortamtting  */
+/*                       */
+
+</style>

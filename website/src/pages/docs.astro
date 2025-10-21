@@ -1,0 +1,54 @@
+---
+export const prerender = true
+import Layout from '../layouts/DocsLayout.astro';
+import Content from '../components/docs.md';
+import * as DocsMD from '../components/docs.md';
+const headings = DocsMD.getHeadings().filter(heading => (heading.depth == 2 || heading.depth == 3));
+---
+<Layout>
+  <section>
+    <div class="headings">
+      {headings.map(heading => (
+      <a href={"#" + heading.slug} class={"heading" + heading.depth}>
+        <h4>{heading.text}</h4>
+      </a>
+      ))}
+    </div>
+    <div class="wrapper">
+      <Content></Content>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* Heading stuff */
+  .headings {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-700);
+    padding: 1.5rem;
+    width: 20%;
+  }
+  .headings a {
+    text-decoration: none;
+  }
+  .heading2 {
+    margin-top: 1rem;
+    color: var(--text);
+  }
+  .heading3 {
+    margin-left: 1rem;
+    color: var(--secondary-200);
+  }
+
+  .wrapper {
+    width: 80%;
+    padding: 1.5rem 2rem;
+    background-color: var(--primary-800);
+  }
+</style>
