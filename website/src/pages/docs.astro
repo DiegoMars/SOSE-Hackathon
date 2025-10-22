@@ -24,18 +24,30 @@ const headings = DocsMD.getHeadings().filter(heading => (heading.depth == 2 || h
   section {
     display: flex;
     flex-direction: row;
+    /* important: don't clip scrolling on the parent */
+    overflow: visible; 
+    align-items: flex-start; /* so the sticky box uses its own height */
   }
 
   /* Heading stuff */
   .headings {
+    position: sticky;     /* make it stick */
+    top: 0;            /* offset from the top of the viewport */
     display: flex;
     flex-direction: column;
-    background-color: var(--primary-700);
+    background-color: var(--background);
+    border-right: 1px solid rgba(108,140,255,0.16);
     padding: 1.5rem;
     width: 20%;
+    max-height: calc(100vh - 2rem); /* ensure it can actually stick */
+    overflow: auto;                 /* scroll inside if content is tall */
+    z-index: 1;                     /* stay above main content if overlapping */
   }
   .headings a {
     text-decoration: none;
+  }
+  .headings a:hover {
+    text-decoration: underline;
   }
   .heading2 {
     margin-top: 1rem;
@@ -43,9 +55,10 @@ const headings = DocsMD.getHeadings().filter(heading => (heading.depth == 2 || h
   }
   .heading3 {
     margin-left: 1rem;
-    color: var(--secondary-200);
+    color: var(--text-200);
   }
 
+  /* Markdown wrapper */
   .wrapper {
     width: 80%;
     padding: 1.5rem 2rem;

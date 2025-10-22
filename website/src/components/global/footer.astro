@@ -7,9 +7,9 @@ export const prerender = true;
   <div class="footer-inner">
     <h3 class="footer-title">Data n’Structor</h3>
     <nav class="footer-links">
-      <a href="#home">Home</a>
-      <a href="#leaderboard">Leaderboard</a>
-      <a href="#docs">Documentation</a>
+      <a href="/">Home</a>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/docs">Documentation</a>
     </nav>
 
     <p class="footer-bottom">© 2025 Data n’Structor.</p>
@@ -17,18 +17,11 @@ export const prerender = true;
 </footer>
 
 <style>
-  :root {
-    --bg: #0b1020;
-    --txt: #eef1ff;
-    --muted: #b9c1ff;
-    --brand: #6c8cff;
-  }
-
   footer {
     background: linear-gradient(180deg, rgba(108,140,255,0.12), rgba(103,232,249,0.06));
     box-shadow: inset 0 1px 0 rgba(108,140,255,0.22), 0 -4px 22px rgba(108,140,255,0.08);
     backdrop-filter: blur(10px);
-    color: var(--txt);
+    color: var(--text);
     text-align: center;
     padding: 2.5rem 0;
   }
@@ -45,17 +38,9 @@ export const prerender = true;
   .footer-title {
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--txt);
+    color: var(--text);
     letter-spacing: 0.04em;
     margin: 0;
-  }
-
-  .footer-tagline {
-    font-size: 1rem;
-    color: #cdd3f7;
-    max-width: 52ch;
-    margin: 0 auto;
-    line-height: 1.6;
   }
 
   /* Navigation links */
@@ -65,20 +50,19 @@ export const prerender = true;
     align-items: center;
     gap: 2.5rem;
     margin-top: 0.5rem;
-    transform: translateX(25px); /* Slight shift to the right so it is aligned symmetrically under the title */
   }
 
   .footer-links a {
-    color: var(--muted);
+    color: var(--primary);
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.25s ease, text-shadow 0.25s ease;
   }
 
-  /* Adds Subtle glow upon hovering */
+  /* Adds Subtle glow upon hovering. Diego: I personally don't like it but its on theme */
   .footer-links a:hover {
-    color: var(--brand);
+    color: var(--accent);
     text-shadow: 0 0 10px rgba(108,140,255,0.5), 0 0 18px rgba(108,140,255,0.35);
   }
 
@@ -86,7 +70,7 @@ export const prerender = true;
     border-top: 1px solid rgba(108,140,255,0.18);
     padding-top: 1rem;
     font-size: 0.9rem;
-    color: var(--muted);
+    color: var(--primary);
     margin: 0;
   }
 
@@ -98,11 +82,6 @@ export const prerender = true;
 
     .footer-title {
       font-size: 1.3rem;
-    }
-
-    .footer-tagline {
-      font-size: 0.9rem;
-      max-width: 40ch;
     }
   }
 </style>
