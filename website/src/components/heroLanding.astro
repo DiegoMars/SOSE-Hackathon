@@ -1,20 +1,269 @@
 ---
-// This makes it so that this component is prerendered, meaning that this while become basic html
-// and CSS. If it wasn't prerendered, then it would "build" this component everytime the page is
-// rendered, which is a lil redundant and not needed if we are not doing like api requests on this
-// specific object
-export const prerender = true
+// Pre-render this component to static HTML/CSS (no client JS needed)
+export const prerender = true;
 ---
-<section>
+
+<!-- Bot Name -->
+<div class="bot-title">Data n’Structor</div>
+
+<main id="home" class="hero-landing" aria-label="Hero Landing">
+  <div class="hero-landing__inner">
+    <div class="hero-landing__copy center">
+      <h1>THE BEST DATA STRUCTURES<br />QUIZ BOT FOR DISCORD</h1>
+      <p class="subhead">
+        Data n’structor is a Discord Bot that posts questions about data structures to test your knowledge.
+        Answer questions correctly to earn points and climb the rankings. Fun, competitive, and builds community.
+      </p>
+      <ul class="trust" aria-label="Highlights">
+        <li>🧩 Variety of questions</li>
+        <li>🏆 Points & Leaderboard</li>
+      </ul>
+    </div>
+
+    <!-- Logo Image -->
+    <div class="hero-landing__visual" aria-hidden="true">
+      <img
+        src="/DSA_Quizzer_Logo.png"
+        alt="Data Structures / Algorithms Quizzer Logo"
+        class="hero-logo"
+        width="500"
+        height="500"
+      />
+    </div>
+  </div>
+</main>
+
+<section id="about" class="section placeholder" aria-label="About">
+  <div class="wrap wide">
+    <h2>About Us</h2>
+    <p>
+      Data n’structor was built for our hackathon to make learning data structures fun and social.
+      It posts quiz questions, awards points for correct answers, and keeps communities engaged.
+    </p>
+  </div>
+</section>
+
+<section id="contact" class="section placeholder" aria-label="Contact">
+  <div class="wrap wide">
+    <h2>Contact Us</h2>
+    <p>
+      Have any feedback or found a bug?
+      <a href="#">Open an issue on GitHub</a> or <a href="#">join our support server</a>.
+      You can also email us at <a href="mailto:team@example.com">team@example.com</a>.
+    </p>
+  </div>
 </section>
 
 <style>
-/*
-  Don't worry about your ids/classes mixing with other components, Astro makes it so that they
-  are contained within this component automatically
-*/
-section {
-  height: 200px;
-  background-color: white;
-}
+  :root {
+    --bg: #0b1020;
+    --txt: #eef1ff;
+    --muted: #b9c1ff;
+    --brand: #6c8cff;
+    --grad-a: #6c8cff;
+    --grad-b: #67e8f9;
+    --ring: rgba(108,140,255,.4);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--txt);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Helvetica Neue, Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  .bot-title {
+    position: relative;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    font-size: 2rem;
+    color: var(--txt);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+  /* =========================
+     HERO SECTION
+     ========================= */
+  .hero-landing {
+    position: relative;
+    min-height: 84vh;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(1200px 600px at 75% 10%, rgba(108,140,255,.20), transparent 60%),
+      linear-gradient(180deg, var(--bg), #070b1a);
+    overflow: clip;
+    padding-top: 2.5rem;
+  }
+
+  /* Subtle tech grid overlay */
+  .hero-landing::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 450px at 75% 10%, rgba(108,140,255,.12), transparent 60%),
+      linear-gradient(180deg, transparent, rgba(7,11,26,.45)),
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: auto, auto, 42px 42px, 42px 42px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-landing::before {
+      animation: grid-drift 22s linear infinite;
+    }
+    @keyframes grid-drift {
+      to {
+        background-position: 0 0, 0 0, 42px 42px, 42px 42px;
+      }
+    }
+  }
+
+  .hero-landing__inner {
+    position: relative;
+    z-index: 1;
+    width: min(1200px, 94vw);
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(1.25rem, 3vw, 3rem);
+    align-items: center;
+  }
+
+  /* =========================
+     TITLES & TEXT
+     ========================= */
+  h1, h2 {
+    font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 1rem;
+  }
+
+  /* Adds underline under H1 */
+  .hero-landing__copy h1 {
+    position: relative;
+    padding-bottom: .35rem;
+  }
+  .hero-landing__copy h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 15%; 
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #6c8cff, #67e8f9);
+    box-shadow: 0 0 10px rgba(108,140,255,.35);
+  }
+
+  @media (max-width: 950px) {
+    .hero-landing__copy h1::after {
+      right: 42%;
+    }
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: #cdd3f7;
+    max-width: 70ch;
+  }
+
+  .subhead {
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    color: #cdd3f7;
+    margin: 0 0 1.25rem;
+    max-width: 68ch;
+  }
+
+  /* =========================
+     SECTIONS
+     ========================= */
+  .section {
+    background: #070b1a;
+    color: var(--txt);
+  }
+
+  .section .wrap {
+    width: min(1200px, 94vw);
+    margin: 0 auto;
+    padding: 3rem 0;
+  }
+
+  .section .wrap.wide {
+    width: min(1400px, 96vw);
+  }
+
+  .placeholder {
+    border-top: 1px solid rgba(108,140,255,0.16);
+  }
+
+  .section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .section p {
+    font-size: 1.05rem;
+    color: #cdd3f7;
+    max-width: 70ch;
+  }
+
+  .section a {
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  .section a:hover {
+    text-decoration: underline;
+  }
+
+  /* =========================
+     LOGO & VISUAL
+     ========================= */
+  .hero-landing__visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Gentle glow ring behind logo */
+  .hero-landing__visual::before {
+    content: "";
+    position: absolute;
+    inset: 8% 14%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,140,255,.28), rgba(108,140,255,0) 60%);
+    filter: blur(10px);
+    pointer-events: none;
+  }
+
+  .hero-logo {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    filter: drop-shadow(0 0 12px rgba(108, 140, 255, 0.28));
+    border-radius: 50%;
+  }
+
+  @media (max-width: 950px) {
+    .hero-landing__inner {
+      grid-template-columns: 1fr;
+    }
+    .hero-landing__visual {
+      order: -1;
+      margin-bottom: 1rem;
+    }
+    .hero-logo {
+      max-width: 250px;
+    }
+  }
 </style>
