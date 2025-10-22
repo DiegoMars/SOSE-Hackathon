@@ -1,7 +1,8 @@
 ---
-const {title="SOSE Submission"} = Astro.props;
+const {title="Documentation"} = Astro.props;
 import Header from "../components/global/header.astro";
 import Footer from "../components/global/footer.astro";
+export const prerender = true
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -109,11 +110,40 @@ import Footer from "../components/global/footer.astro";
   </main>
   <Footer>
   </Footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const anchorLinks = document.querySelectorAll('a[href^="#"]');
+      anchorLinks.forEach((link) => {
+        const targetId = link.getAttribute("href").substring(1);
+        const target = document.getElementById(targetId);
+
+        if (!target) return;
+        link.addEventListener("click", function () {
+          setTimeout(() => {
+            target.classList.add("flash");
+            setTimeout(() => {
+              target.classList.remove("flash");
+            }, 1000);
+          }, 500);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
 
 <!-- Global is needed here to make it global -->
 <style is:global>
+@keyframes flash {
+  0% { background-color: transparent; }
+  30% { background-color: #ffffff1a; }
+  60% { background-color: #ffffff33; }
+  100% { background-color: transparent; }
+}
+.flash {
+  animation: flash 0.8s ease-in-out;
+}
+
 /*                        */
 /* Real Time Colors Stuff */
 /*                        */
@@ -136,15 +166,53 @@ h1, h2, h3, h4, h5, small {
 
 html {font-size: 100%;} /* 16px */
 
-h1 {font-size: 4.210rem; /* 67.36px */}
+h1 {font-size: 3.158rem; /* 50.56px */}
 
-h2 {font-size: 3.158rem; /* 50.56px */}
+h2 {font-size: 2.369rem; /* 37.92px */}
 
-h3 {font-size: 2.369rem; /* 37.92px */}
+h3 {font-size: 1.777rem; /* 28.48px */}
 
-h4 {font-size: 1.777rem; /* 28.48px */}
+h4 {font-size: 1.333rem; /* 21.28px */}
 
-h5 {font-size: 1.333rem; /* 21.28px */}
-
-small {font-size: 0.750rem; /* 12px */}
+/*                       */
+/* Markdown Fortamtting  */
+/*                       */
+h1 {
+  font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+}
+h2 {
+  font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+}
+h3 {
+  padding-top: 0.5rem;
+  color: var(--text-200);
+}
+p {
+  margin: 0;
+}
+pre {
+  padding: 1rem;
+}
+ul { 
+  margin: 0 0 0.5rem;
+}
+pre {
+  border-radius: 0.5rem;
+}
+code span {
+  line-height: 1.5;
+  font-size: 1rem;
+}
+p code, li code {
+  line-height: 1.5;
+  font-size: 1rem;
+  background-color:#24292e;
+  color:#e1e4e8;
+  padding: 2px;
+  border-radius: 0.25rem;
+}
+a {
+  color: var(--accent-300);
+  text-decoration: none;
+}
 </style>
