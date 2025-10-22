@@ -1,0 +1,29 @@
+# Virtual environment
+.venv/
+
+# Secrets and environment files
+.env
+*.env
+
+# Python cache / build output
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+build/
+dist/
+*.egg-info/
+
+# Logs and runtime data
+*.log
+*.sqlite3
+
+# OS-specific clutter
+.DS_Store
+Thumbs.db
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.swp
