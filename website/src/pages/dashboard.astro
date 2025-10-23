@@ -10,6 +10,7 @@ if (!accessToken || !refreshToken) {
 }
 
 let session;
+let profile: { username: string|null; avatar_url: string|null } | null = null;
 try {
   session = await supabase.auth.setSession({
     refresh_token: refreshToken.value,
@@ -24,6 +25,15 @@ try {
     });
     return Astro.redirect("/signin");
   }
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    const { data } = await supabase
+      .from('profiles')
+      .select('username, avatar_url')
+      .eq('id', user.id)
+      .maybeSingle();
+    profile = data;
+  }
 } catch (error) {
   Astro.cookies.delete("sb-access-token", {
     path: "/",
@@ -33,12 +43,10 @@ try {
   });
   return Astro.redirect("/signin");
 }
-
-const email = session.data.user?.email;
 ---
 <Layout title="dashboard">
 <section class="dashboard">
-  <h1>Welcome {email}</h1>
+  <h1>Welcome {profile.username}</h1>
   <p>We are happy to see you here</p>
   <form action="/api/auth/signout">
     <button type="submit">Sign out</button>
