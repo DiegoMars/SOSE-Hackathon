@@ -1,11 +1,29 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "../../assets/Data n'structor.png";
+
+import { supabase } from '../../lib/supabase';
+const at = Astro.cookies.get('sb-access-token')?.value;
+const rt = Astro.cookies.get('sb-refresh-token')?.value;
+
+let profile: { username: string|null; avatar_url: string|null } | null = null;
+if (at && rt) {
+  await supabase.auth.setSession({ access_token: at, refresh_token: rt });
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    const { data } = await supabase
+      .from('profiles')
+      .select('username, avatar_url')
+      .eq('id', user.id)
+      .maybeSingle();
+    profile = data;
+  }
+}
 ---
 <nav>
   <div class="logo">
     <a href="/" target="_self">
-      <Image src={Logo} alt="Logo" height="200" loading="eager">
+      <Image src={Logo} alt="Logo" height="200" loading="eager" />
     </a>
   </div>
   <div class="links">
@@ -18,26 +36,49 @@ import Logo from "../../assets/Data n'structor.png";
     <a href="/docs" target="_self">
       <h4>Documentation</h4>
     </a>
-    <!-- Adding sign-in stuff just incase it gets used in the future -->
-    <!-- <a href="/signin" target="_self"> -->
-    <!--   <h4>Sign In</h4> -->
-    <!-- </a> -->
-    <!-- <a href="/register" target="_self"> -->
-    <!--   <h4>Register</h4> -->
-    <!-- </a> -->
   </div>
+  {profile ? (
+    <details class="profile">
+      <summary>
+        <img
+          src={profile.avatar_url ?? 'https://cdn.pfps.gg/pfps/9332-default-discord-pfp.png'}
+          alt="profile"
+          width="28" height="28"
+        />
+        <span class="username">{profile.username ?? 'You'}</span>
+        <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M5 7l5 6 5-6H5z"></path></svg>
+      </summary>
+
+      <div class="menu">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/api/auth/signout">Sign out</a>
+      </div>
+    </details>
+  ) : (
+    <form action="/api/auth/signin" method="post">
+      <button class="signin" name="provider" value="discord" type="submit">
+        Log in with Discord
+      </button>
+    </form>
+  )}
 </nav>
 
 <style>
   nav {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     padding: 1rem;
     background-color: var(--background);
     border-bottom: 1px solid rgba(108,140,255,0.16);
   }
 
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+  }
   .logo img{
     height: 6rem;
     width: 6rem;
@@ -48,10 +89,12 @@ import Logo from "../../assets/Data n'structor.png";
     display: flex;
     flex-direction: row;
   }
-
-  .links > a {
+  .links a {
     color: var(--accent);
     text-decoration: none;
+  }
+  .links a:hover { 
+    text-decoration: underline; 
   }
 
   .disabled-link {
@@ -62,6 +105,109 @@ import Logo from "../../assets/Data n'structor.png";
   .links h4 {
     padding-left: 1.5rem;
     font-size: 1.333rem; /* 21.28px */
+  }
+
+   /* Make the sign-in button look like your styled link */
+  form {
+    /* margin: auto 0; */
+    margin: 0;
+  }
+  .signin {
+    margin: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem .8rem;
+    border-radius: 10px;
+    border: 1px solid var(--accent-300);
+    color: var(--text);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent) 16%, transparent),
+      transparent
+    );
+    text-decoration: none;
+    transition: transform .08s ease, border-color .12s ease, background .12s ease;
+
+    /* reset native button look */
+    appearance: none;
+    font: inherit;
+    cursor: pointer;
+  }
+  .signin:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-200);
+  }
+
+  .profile {
+    position: relative;               /* anchor the absolute menu here */
+    margin-left: .5rem;
+    display: inline-block;            /* so the absolute menu aligns to this box */
+  }
+  .profile > summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .55rem;
+    border: 1px solid var(--background-600);
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text);
+    user-select: none;
+    line-height: 1;                   /* tidy vertical alignment */
+  }
+  .profile > summary::-webkit-details-marker { display: none; }
+  .profile summary img {
+    border-radius: 50%;
+    border: 1px solid var(--background-600);
+    background: var(--background-800);
+    width: 28px; height: 28px;
+    object-fit: cover;
+  }
+  .profile summary svg {
+    width: 14px; height: 14px;
+    fill: var(--text-300);
+  }
+  .username {
+    max-width: 12ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .profile[open] > summary {
+    border-color: var(--accent-300);
+    background: var(--background-700);
+  }
+  .profile .menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 180px;
+    display: grid;
+    background: var(--background-800);
+    border: 1px solid var(--background-600);
+    border-radius: 12px;
+    padding: .4rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,.25);
+    z-index: 50;
+  }
+  .profile .menu a,
+  .profile .menu button {
+    appearance: none;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: .5rem .6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font: inherit;
+    cursor: pointer;
+  }
+  .profile .menu a:hover,
+  .profile .menu button:hover {
+    background: var(--background-700);
   }
 
   /* Media queries */
