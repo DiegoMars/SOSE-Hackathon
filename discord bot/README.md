@@ -83,5 +83,54 @@ INFO:discord.gateway:Connected to gateway.
 
 
 ### Discord Bot Setup (if you’re new)
-1. Go to the Discord Developer Portal
-2. 
+1. Create an application
+- Visit Discord Developer Portal (https://discord.com/developers/applications)
+- Click New Application -> give it a name
+
+2. Add a bot user
+- Select bot in the sidebar -> Click Add Bot
+
+3. Enable Message Content Intent
+- Scroll down -> toggle MESSAGE CONTENT INTENT ON
+
+4. Copy the bot token
+- Under the token section → click Reset Token → copy it → paste into your .env
+
+5. Generate an invite link
+- Go to OAuth2 → URL Generator
+- Under Scopes, check bot
+- Under Bot Permissions, check:
+  - Read Messages /View Channels
+  - Send Messages
+  - Create Public Threads
+  - Send Messages in Threads
+  - Read Message History
+- Copy the generated URL → open it in your browser → select your server → Authorize
+
+### For Teammates
+After cloning:
+
+cd discord-bot
+python -m venv .venv
+source .venv/Scripts/activate   # or . .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env            # fill in your own Discord & Supabase creds
+py bot.py
+
+### How the Leaderboard Works
+- Each player's final score (correct / total) is inserted into Supabase when they finish
+- One row per (guild + user); replays overwrite the previous score.
+- The bot displays usernames publicly while storing Discord IDs privately.
+
+### Future Improvements
+- Add slash commands and ephemeral mode
+- Auto-refresh leaderboard command in Discord
+
+
+### License
+MIT License © 2025 Team SOSE Hackathon
+
+### Credits
+Built for the SOSE Hackathon 2025
+Team: Data n' Structor
+Members: Diego Mars, Eddy Moussa, Justin Scott, Nafees Imtiyaj
