@@ -55,13 +55,26 @@ if (at && rt) {
       </div>
     </details>
   ) : (
-    <form action="/api/auth/signin" method="post">
-      <button class="signin" name="provider" value="discord" type="submit">
-        Log in with Discord
-      </button>
-    </form>
+    // <form action="/api/auth/signin" method="post">
+    //   <button class="signin" name="provider" value="discord" type="submit">
+    //     Log in with Discord
+    //   </button>
+    // </form>
+    <button class="signin" id="signin">
+      Log in with Discord
+    </button>
   )}
 </nav>
+
+<script>
+  const button = document.getElementById('signin');
+
+  if (button) {
+    button.addEventListener('click', () => {
+      alert('Signing in disabled!');
+    });
+  }
+</script>
 
 <style>
   nav {
